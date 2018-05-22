@@ -36,15 +36,13 @@ export class AppService {
 
     delete(inputUsers) {
         const usersID = [];
-        const headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers: headers});
-        const _http = this.http;
-        const _url = this.url;
         inputUsers.forEach(function (user) {
-            console.log('log')
-            return _http.delete(_url + 'delete/' + user._id, options)
-                .pipe(catchError((error: Response) => Observable.throw(error.json())))
+            usersID.push(user._id)
         });
+        const headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers, body: usersID});
+        return this.http.delete(this.url + 'delete', options)
+            .pipe(catchError((error: Response) => Observable.throw(error.json())))
     }
 
     update(userID, cell, cellValue) {

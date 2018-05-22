@@ -105,23 +105,15 @@ export class AppComponent {
         // console.log('Activate Event', event);
     }
 
-    add() {
-        // this.selected.push(this.rows[1], this.rows[3]);
-    }
-
-    update() {
-        // this.selected = [this.rows[1], this.rows[3]];
-    }
-
     delete() {
         // console.log(this.selected);
         this.appService.delete(this.selected)
-        // .subscribe(
-        //     err => {
-        //         console.log(err);
-        //         this.fecth()
-        //     }
-        // );
+            .subscribe(
+                err => {
+                    console.log(err);
+                    this.fecth()
+                }
+            );
     }
 
     updateValue(event, cell, rowIndex, id) {

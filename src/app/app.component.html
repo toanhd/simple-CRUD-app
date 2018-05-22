@@ -1,151 +1,154 @@
 <div class="container-fluid pt-4">
-    <ng-template #content let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h4 class="modal-title">Create new</h4>
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-                <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input formControlName="name" type="text" class="form-control" id="Name" placeholder="Enter name">
-                </div>
-                <div class="form-group">
-                    <label for="Company">Company</label>
-                    <input formControlName="company" type="email" class="form-control" id="Company" placeholder="Enter company">
-                </div>
-                <div class="form-group">
-                    <label for="Email">Email address</label>
-                    <input formControlName="email" type="text" class="form-control" id="Email" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="Phone">Phone number</label>
-                    <input formControlName="phone" type="number" class="form-control" id="Phone" placeholder="Enter phone number">
-                </div>
-            </form>
-            <p class="text-danger">{{responseMess}}</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-            <button type="button" class="btn btn-outline-primary" (click)="onFormSubmit()">Create</button>
-        </div>
-    </ng-template>
-
-    <!---->
     <div class="row">
+        <div class="col-2"></div>
         <div class="col-8">
-            <button class="btn btn-primary" href="javascript:void(0)" (click)="open(content)">Create new</button>
-            |
-            <!--<button class="btn btn-primary" href="javascript:void(0)" (click)="update()">Update</button>-->
-            <!--|-->
-            <button class="btn btn-danger" href="javascript:void(0)" (click)="delete()">Delete selected</button>
-            <button class="btn btn-danger" href="javascript:void(0)" (click)="fecth()">Fectch</button>
-        </div>
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create new</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input formControlName="name" type="text" class="form-control" id="Name" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Company">Company</label>
+                            <input formControlName="company" type="email" class="form-control" id="Company" placeholder="Enter company">
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">Email address</label>
+                            <input formControlName="email" type="text" class="form-control" id="Email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="Phone">Phone number</label>
+                            <input formControlName="phone" type="number" class="form-control" id="Phone" placeholder="Enter phone number">
+                        </div>
+                    </form>
+                    <p class="text-danger">{{responseMess}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="onFormSubmit()">Create</button>
+                </div>
+            </ng-template>
 
-        <div class="col-4">
-            <input class="pull-right"
-                   type='text'
-                   style='width:100%;'
-                   placeholder='Type to filter the name column...'
-                   (keyup)='updateFilter($event)'
-            />
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-10">
-            <ngx-datatable
-                #dataTable
-                style="width: 100%"
-                class="material"
-                [rows]="rows"
-                [columnMode]="'force'"
-                [headerHeight]="50"
-                [footerHeight]="50"
-                [rowHeight]="'auto'"
-                [limit]="10"
-                [selected]="selected"
-                [selectionType]="'checkbox'"
-                [selectAllRowsOnPage]="false"
-                (activate)="onActivate($event)"
-                (select)='onSelect($event)'
-                [sorts]="[{prop: 'name', dir: 'asc'}]">
-                <ngx-datatable-column
-                    [width]="30"
-                    [sortable]="false"
-                    [canAutoResize]="false"
-                    [draggable]="false"
-                    [resizeable]="false"
-                    [headerCheckboxable]="true"
-                    [checkboxable]="true">
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Name">
-                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <!---->
+            <div class="row">
+                <div class="col-8">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn btn-primary" href="javascript:void(0)" (click)="open(content)">Create new</button>
+                        <button class="btn btn-danger" href="javascript:void(0)" (click)="delete()">Delete selected</button>
+                    </div>
+                    <button class="btn btn-outline-warning pull-right" href="javascript:void(0)" (click)="fecth()">Fectch</button>
+                </div>
+                <div class="col-4">
+                    <input class="pull-right"
+                           type='text'
+                           style='width:100%;'
+                           placeholder='Type to filter the name column...'
+                           (keyup)='updateFilter($event)'
+                    />
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-10">
+                    <ngx-datatable
+                        #dataTable
+                        style="width: 100%"
+                        class="material"
+                        [rows]="rows"
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'auto'"
+                        [limit]="10"
+                        [selected]="selected"
+                        [selectionType]="'checkbox'"
+                        [selectAllRowsOnPage]="false"
+                        (activate)="onActivate($event)"
+                        (select)='onSelect($event)'
+                        [sorts]="[{prop: 'name', dir: 'asc'}]">
+                        <ngx-datatable-column
+                            [width]="30"
+                            [sortable]="false"
+                            [canAutoResize]="false"
+                            [draggable]="false"
+                            [resizeable]="false"
+                            [headerCheckboxable]="true"
+                            [checkboxable]="true">
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Name">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <span
                             title="Double click to edit"
                             (dblclick)="editing[rowIndex + '-name'] = true"
                             *ngIf="!editing[rowIndex + '-name']">
                             {{value}}
                         </span>
-                        <input
-                            autofocus
-                            (blur)="updateValue($event, 'name', rowIndex, row._id)"
-                            *ngIf="editing[rowIndex+ '-name']"
-                            type="text"
-                            [value]="value"
-                        />
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Company">
-                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <input
+                                    autofocus
+                                    (blur)="updateValue($event, 'name', rowIndex, row._id)"
+                                    *ngIf="editing[rowIndex+ '-name']"
+                                    type="text"
+                                    [value]="value"
+                                />
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Company">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <span
                             title="Double click to edit"
                             (dblclick)="editing[rowIndex + '-company'] = true"
                             *ngIf="!editing[rowIndex + '-company']">
                             {{value}}
                         </span>
-                        <input
-                            autofocus
-                            (blur)="updateValue($event, 'company', rowIndex, row._id)"
-                            *ngIf="editing[rowIndex+ '-company']"
-                            type="text"
-                            [value]="value"
-                        />
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Email"></ngx-datatable-column>
-                <ngx-datatable-column name="Phone">
-                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <input
+                                    autofocus
+                                    (blur)="updateValue($event, 'company', rowIndex, row._id)"
+                                    *ngIf="editing[rowIndex+ '-company']"
+                                    type="text"
+                                    [value]="value"
+                                />
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Email"></ngx-datatable-column>
+                        <ngx-datatable-column name="Phone">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <span
                             title="Double click to edit"
                             (dblclick)="editing[rowIndex + '-phone'] = true"
                             *ngIf="!editing[rowIndex + '-phone']">
                             {{value}}
                         </span>
-                        <input
-                            autofocus
-                            (blur)="updateValue($event, 'phone', rowIndex, row._id)"
-                            *ngIf="editing[rowIndex + '-phone']"
-                            type="number"
-                            [value]="value"
-                        />
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-        </div>
-        <div class="col-2">
-            <div class='selected-column'>
-                <h4>Selections
-                    <small>({{selected?.length}})</small>
-                </h4>
-                <ul>
-                    <li *ngFor='let sel of selected'>
-                        {{sel.name}}
-                    </li>
-                    <li *ngIf="!selected?.length">No Selections</li>
-                </ul>
+                                <input
+                                    autofocus
+                                    (blur)="updateValue($event, 'phone', rowIndex, row._id)"
+                                    *ngIf="editing[rowIndex + '-phone']"
+                                    type="number"
+                                    [value]="value"
+                                />
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+                <div class="col-2">
+                    <div class='selected-column'>
+                        <h4>Selections
+                            <small>({{selected?.length}})</small>
+                        </h4>
+                        <ul>
+                            <li *ngFor='let sel of selected'>
+                                {{sel.name}}
+                            </li>
+                            <li *ngIf="!selected?.length">No Selections</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
